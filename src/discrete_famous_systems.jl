@@ -331,3 +331,17 @@ function arnoldcat_eom(u, p, n)
     return SVector{2}(2x + y, x + y)
 end
 arnoldcat_jacob(u, p, n) = @SMatrix [2 1; 1 1]
+
+
+"""
+```julia
+tent(u0 = rand())
+```
+Tent map. A chaotic map on ``[1, 0]``. Its graph has two line segments, from
+``(0, 0)`` to ``(a, b)`` to ``(1, 0)``.
+"""
+function tent(u0 = rand(); a=0.5, b=1.0)
+    return DDS(tent_eom, u0, [a, b], tent_jacob)
+end
+tent_eom(u, p, n) = u<p[1] ? (p[2]*u/p[1]) : (1-u)*p[2]/(1-p[1])
+tent_jacob(u, p, n) = u<p[1] ? (p[2]/p[1]) : -p[2]/(1-p[1])

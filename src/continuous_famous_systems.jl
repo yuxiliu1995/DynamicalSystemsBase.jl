@@ -698,3 +698,32 @@ function ueda_jacob(u, p, t)
     return @SMatrix [0      1;
                      -3*x^2 -k]
 end
+
+
+"""
+The van der Pol oscillator is an oscillator with nonlinear damping, described by
+```math
+\\ddot x  - \\epsilon (1-x^2) \\dot x + x = 0.
+```
+This system behaves like a damped oscillator when ϵ ≈ 0, and has a stable limit
+cycle when ϵ ≫ 1. An electric circuit implementing this oscillator was first
+constructed by van der Pol in 1920. [1]
+
+[1] : [Takashi Kanamaru (2007) Van der Pol oscillator. Scholarpedia, 2(1):2202](http://www.scholarpedia.org/article/Van_der_Pol_oscillator)
+"""
+function vanderpol(u0 = [1.0, 0]; ϵ = 8.0)
+    return CDS(vanderpol_eom, u0, [ϵ], vanderpol_jacob)
+end
+function vanderpol_eom(u, p, t)
+    x,y = u
+    ϵ = p[1]
+    xdot = y
+    ydot = ϵ*(1-x^2)*y - x
+    return SVector{2}(xdot, ydot)
+end
+function vanderpol_jacob(u, p, t)
+    x,y = u
+    ϵ = p[1]
+    return @SMatrix [0         1;
+                     -2ϵ*x*y-1 ϵ*(1-x^2)]
+end

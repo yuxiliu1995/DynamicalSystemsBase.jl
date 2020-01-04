@@ -502,13 +502,16 @@ nosehoover(u0 = [0, 0.1, 0])
 Three dimensional conservative continuous system, discovered in 1984 during
 investigations in thermodynamical chemistry by Nosé and Hoover, then
 rediscovered by Sprott during an exhaustive search as an extremely simple
-chaotic system. [1]
+chaotic system. [1] It is notable for being a system with one shrange attractor
+and no equilibrum. It has Lyapunov exponents (0.0138, 0, −0.0138). [2]
 
-See Chapter 4 of "Elegant Chaos" by J. C. Sprott. [2]
+See Chapter 4 of "Elegant Chaos" by J. C. Sprott. [3]
 
 [1] : Hoover, W. G. (1995). Remark on ‘‘Some simple chaotic flows’’. *Physical Review E*, *51*(1), 759.
 
-[2] : Sprott, J. C. (2010). *Elegant chaos: algebraically simple chaotic flows*. World Scientific.
+[2] : Jafari, Sajad, J. C. Sprott, and S. Mohammad Reza Hashemi Golpayegani. "Elementary quadratic chaotic flows with no equilibria." *Physics Letters A* 377, no. 9 (2013): 699-702.
+
+[3] : Sprott, J. C. (2010). *Elegant chaos: algebraically simple chaotic flows*. World Scientific.
 """
 nosehoover(u0 = [0, 0.1, 0]) = CDS(nosehoover_eom, u0, nothing, nosehoover_jacob)
 function nosehoover_eom(u, p, t)

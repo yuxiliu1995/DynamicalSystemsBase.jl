@@ -335,10 +335,13 @@ arnoldcat_jacob(u, p, n) = @SMatrix [2 1; 1 1]
 
 """
 ```julia
-tent(u0 = rand())
+tent(u0 = rand(); a=0.5, b=1.0)
 ```
-Tent map. A chaotic map on ``[1, 0]``. Its graph has two line segments, from
-``(0, 0)`` to ``(a, b)`` to ``(1, 0)``.
+Tent map. A map on ``[1, 0]``. Its graph has two line segments, from
+``(0, 0)`` to ``(a, b)`` to ``(1, 0)``. In general, if 0 < a < 1, b > 1, the map
+is chaotic, with a chaotic repellor homeomorphic to the Cantor set. [1]
+
+[1] : Klebanoff, A., & Rickert, J. (1998). Studying the Cantor Dust at the Edge of Feigenbaum Diagrams. *The College Mathematics Journal*, *29*(3), 189-198.
 """
 function tent(u0 = rand(); a=0.5, b=1.0)
     return DDS(tent_eom, u0, [a, b], tent_jacob)
